@@ -23,9 +23,24 @@ userChoice(){//check to see if task is private
     else {
       return false;
     }
+  },
+
+usershow(){
+  if (this.privatet== 0){
+    return true;
   }
+  
+  if(this.createdById == Meteor.userId() ){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
 
 });
+
+
 
 
 Template.myJumbo.events({

@@ -138,27 +138,24 @@ my-4 justify-content-around">
     {{>viewTemp}}
     {{>confirmTemp}}
     {{#each allTask}}
-   
-<div class="col-md-4" id={{_id}}>
-            
-              <div class="card-group">
-  <div class="card">
-    <div class="card-body" id ={{_id}}>
-      <h5 class="card-title">{{tName}}</h5>
-      <p class="card-text">{{tdesc}}</p>
-      {{#if userChoice}}
-      <h5></h5>
-      {{/if}}
-      <button type="button" class="btn btn-sm btn-outline-secondary js-view ">View</button>
-      <i class="fa fa-trash js-delete color2"></i>
-      
-      
-    </div>
-  </div>
-               
-                
-            </div>
+      {{#if usershow}} 
+        <div class="col-md-4 " id={{_id}}>
+          <div class="card-group">
+              <div class="card ">
+                  <div class="card-body {{#if userChoice}} privatetask {{/if}}" id ={{_id}}>
+                      <h5 class="card-title">{{tName}}</h5>
+                      <p class="card-text">{{tdesc}}</p>
+                        {{#if currentUser}} 
+                          <h5>by {{createdBy}}</h5>
+                        {{/if}}
+                        <button type="button" class="btn btn-sm btn-outline-secondary js-view ">View</button>
+                        <i class="fa fa-trash js-delete color2"></i>
+        
+                  </div>
+              </div>
+          </div>
           </div> 
+      {{/if}}
     {{/each}}
   </div>  
   </div>     
