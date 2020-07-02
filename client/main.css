@@ -14,3 +14,12 @@ body {
 .privatetask{
 	background: #99ddff;
 }
+
+.backimg{
+	background: url("https://images3.alphacoders.com/906/906161.jpg");
+	background-size: cover;
+}
+
+.backcol{
+	background: #F7819F;
+}

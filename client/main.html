@@ -2,8 +2,8 @@
   <title>toDolist</title>
 </head>
 
-<body>
-  <div class="container">
+<body class ="backimg">
+  <div class="container backcol">
   {{> navBar}}
   {{> mainBody}}
   </div>
@@ -56,21 +56,22 @@
 
       
         
-
+        {{#if currentUser}} 
         <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTaskModal">
   Add your task here
 </button>
-
+        {{/if}}
 <div class="row
 my-4 justify-content-around">
   <div class ="col-4 text-center">
      <div class="btn btn-primary">
+
         {{> loginButtons}}
         </div>
   </div>
 </div>
-
+        
 
 <!-- Modal -->
 
@@ -133,7 +134,7 @@ my-4 justify-content-around">
 
 
 <template name = "tasksLib">
-<div class="container darkmode">
+<div class="container ">
   <div class="row">
     {{>viewTemp}}
     {{>confirmTemp}}
@@ -141,7 +142,7 @@ my-4 justify-content-around">
       {{#if usershow}} 
         <div class="col-md-4 " id={{_id}}>
           <div class="card-group">
-              <div class="card ">
+              <div class="card mb-3 ">
                   <div class="card-body {{#if userChoice}} privatetask {{/if}}" id ={{_id}}>
                       <h5 class="card-title">{{tName}}</h5>
                       <p class="card-text">{{tdesc}}</p>
