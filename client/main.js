@@ -9,14 +9,14 @@ import './main.html';
 import '../lib/collection.js';
 import'../lib/accounts-ui.js';
 
-
+Meteor.subscribe("taskGallery")
 
 Template.tasksLib.helpers({
   allTask() {
     return taskdb.find();
   },
 
-userChoice(){//check to see if task is private 
+userChoice(){ 
     if ((this.privatet == 1)){
       return true;
     }
@@ -56,7 +56,7 @@ Template.myJumbo.events({
   },
 
 	'click .js-save'(event, instance){
- /*1 = private  0 = public*/
+ 
     var puborpriv = 0;  
     if ($("#privatet").prop("checked")==true)
       puborpriv = 1;
@@ -72,14 +72,17 @@ Template.myJumbo.events({
 		var tasktitle = $('#tName').val();
 		var tdesc = $ ('#tdesc').val();
     var fulltask =$('#fdesc').val();
+
 		taskdb.insert ({
     "privatet": puborpriv,
 	  "tName" : tasktitle,
 	  "tdesc" : tdesc,
     "fdesc" : fulltask,
+    "completed" : false,
     "createdOn": new Date().getTime(),
     "createdBy": Meteor.users.findOne({_id:Meteor.userId()}).emails[0].address,
     "createdById": Meteor.userId()
+    
 
 		});
 
@@ -100,10 +103,10 @@ Template.tasksLib.events({
   
   'click .js-delete'(event, instance) {
       var myId = this._id;
-        /*taskdb.remove({_id:myId});*/
+        
         
         if ((this.createdById == undefined) || (this.createdById == Meteor.userId())){
-          console.log(myId);
+          
       $("#deleteId").val(myId);
       $("#confirmModal").modal("show");
     }
@@ -115,12 +118,27 @@ Template.tasksLib.events({
      'click .js-view'(event, instance){
     $("#viewTask").modal('show');
     var myID = this._id;
-    console.log(myID);
+    
     $('#viewContent').html(taskdb.findOne({_id:myID}).fdesc);
     
 
   },
-
+    'change .smartwater' : function(){
+      var myId = this._id;
+      
+      var tcomp = this.completed;
+      if(tcomp){
+        taskdb.update({_id:myId},
+          {$set:{
+            "completed": false
+          }});
+      } else{
+        taskdb.update({_id:myId},
+          {$set:{
+            "completed": true
+          }});
+      }
+    }
 });
 
 Template.confirmTemp.events({

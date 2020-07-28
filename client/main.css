@@ -21,5 +21,14 @@ body {
 }
 
 .backcol{
-	background: #F7819F;
+	background-color:#ffffff44;
+
+}
+
+.bg-light{
+	background-color:#ffffff44;
+}
+.checked{
+	text-decoration: line-through;
+	color:grey;
 }
